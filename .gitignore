@@ -156,3 +156,6 @@ terraform.tfstate.*
 
 !mlruns/
 !mkdocs.yml
+
+#data
+data/raw/*
