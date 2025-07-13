@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_telegram_messages
+    columns:
+      - name: message_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_channels
+    columns:
+      - name: channel_name
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_dates
+    columns:
+      - name: date
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_messages
+    columns:
+      - name: message_id
+        tests:
+          - not_null
+          - unique
+      - name: channel_name
+        tests:
+          - not_null
