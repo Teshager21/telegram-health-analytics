@@ -11,7 +11,11 @@ RUN apt-get update && \
 
 # Copy and install Python deps
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir --default-timeout=600 \
+        --retries=10 --progress-bar=on \
+        -r requirements.txt
+
 
 # Copy everything else
 COPY . .
