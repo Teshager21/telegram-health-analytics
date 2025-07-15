@@ -55,13 +55,15 @@ def batch(iterable, n=1):
         yield iterable[ndx : min(ndx + n, length)]
 
 
+images_dir = "data/raw/telegram_images/2025-07-13"
+
+
 def main():
     conn = psycopg2.connect(
         host=DB_HOST, port=DB_PORT, dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD
     )
     cur = conn.cursor()
 
-    images_dir = "data/raw/telegram_images/2025-07-13"
     records_to_insert = []
 
     for root, _, files in os.walk(images_dir):
