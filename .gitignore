@@ -159,3 +159,9 @@ terraform.tfstate.*
 
 #data
 data/raw/*
+
+.secrets.baseline
+session_name.session
+
+tmp7u57kycj
+tmpncyduk05
