@@ -31,3 +31,12 @@ models:
       - name: channel_name
         tests:
           - not_null
+  - name: fct_product_mentions
+    description: "Fact table summarizing product mentions in Telegram messages."
+    columns:
+      - name: product_name
+        description: "Name of the mentioned product."
+        tests:
+          - not_null
+      - name: mentions
+        description: "Number of times the product was mentioned."
