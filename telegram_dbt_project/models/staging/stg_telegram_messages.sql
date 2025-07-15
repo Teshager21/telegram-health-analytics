@@ -2,8 +2,8 @@
     materialized='view'
 ) }}
 
-with raw_messages as (
-    select
+WITH raw_messages AS (
+    SELECT
         id,
         date,
         message,
@@ -12,16 +12,27 @@ with raw_messages as (
         media_file,
         channel_name,
         load_date
-    from raw.telegram_messages
+    FROM raw.telegram_messages
 )
 
-select
-    id as message_id,
-    date as message_date,
+SELECT
+    id AS message_id,
+    date AS message_date,
     message,
     sender_id,
     has_media,
     media_file,
     channel_name,
-    load_date
-from raw_messages
+    load_date,
+
+    -- NEW: Extract product name
+    CASE
+        WHEN lower(message) LIKE '%aptamil%' THEN 'APTAMIL'
+        WHEN lower(message) LIKE '%biotin%' THEN 'BIOTIN'
+        WHEN lower(message) LIKE '%olive oil%' THEN 'ORGANIC EXTRA OLIVE OIL'
+        -- add more conditions as needed, e.g.:
+        -- WHEN lower(message) LIKE '%vitamin c%' THEN 'VITAMIN C'
+        ELSE NULL
+    END AS product_name
+
+FROM raw_messages
